@@ -1,0 +1,94 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "lighthouse-performance-audits",
+    "displayName": "Lighthouse Performance Audits",
+    "description": "",
+    "configuration": [
+        {
+            "name": "nrqlSettings",
+            "title": "NRQL Settings",
+            "type": "namespace",
+            "items": [
+                {
+                    "name": "accountId",
+                    "title": "Account ID",
+                    "description": "Account ID to be associated with the query",
+                    "type": "account-id"
+                },
+                {
+                    "name": "requestedUrl",
+                    "title": "Requested URL",
+                    "description": "The URL that was tested as part of a Synthetics script",
+                    "type": "string"
+                },
+                {
+                    "name": "timeframe",
+                    "title": "Average across timeframe",
+                    "description": "We will average the Lighthouse scores across this timeframe for best results",
+                    "type": "enum",
+                    "items": [
+                        {
+                            "title": "4 hours",
+                            "value": "4 hours"
+                        },
+                        {
+                            "title": "8 hours",
+                            "value": "8 hours"
+                        },
+                        {
+                            "title": "12 hours",
+                            "value": "12 hours"
+                        },
+                        {
+                            "title": "16 hours",
+                            "value": "16 hours"
+                        },
+                        {
+                            "title": "20 hours",
+                            "value": "20 hours"
+                        },
+                        {
+                            "title": "24 hours",
+                            "value": "24 hours"
+                        }
+                    ]
+                },
+                {
+                    "name": "strategy",
+                    "title": "Strategy (Device)",
+                    "description": "The strategy or device type used to calculate the Lighthouse scores",
+                    "type": "enum",
+                    "items": [
+                        {
+                            "title": "Desktop",
+                            "value": "desktop"
+                        },
+                        {
+                            "title": "Mobile",
+                            "value": "mobile"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "uiSettings",
+            "title": "UI Settings",
+            "type": "namespace",
+            "items": [
+                {
+                    "name": "hidePassed",
+                    "title": "Hide Passed",
+                    "description": "Whether to display passed checks in the Visualization",
+                    "type": "boolean"
+                },
+                {
+                    "name": "hideNull",
+                    "title": "Hide Null Scored",
+                    "description": "Whether to display checks that weren't scored",
+                    "type": "boolean"
+                }
+            ]
+        }
+    ]
+}

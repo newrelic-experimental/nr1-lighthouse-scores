@@ -1,0 +1,6 @@
+{
+  "schemaType": "NERDPACK",
+  "id": "fa18e70d-6271-4922-966e-679928ab3242",
+  "displayName": "Lighthouse Scores & Audits",
+  "description": "Custom Visualizations for displaying Lighthouse score and test results from your site"
+}
