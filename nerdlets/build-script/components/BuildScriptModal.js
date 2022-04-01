@@ -272,7 +272,7 @@ const EVENT_URL = '${event_url}';
                     </Link>
                     <TextField
                       label="New Relic License Key"
-                      placeholder="NRAK-XXX or $secure.LICENSE_KEY"
+                      placeholder="XXXNRAL or $secure.LICENSE_KEY"
                       value={nrLicenseKey}
                       invalid={
                         !isValid &&

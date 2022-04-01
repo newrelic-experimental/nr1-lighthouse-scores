@@ -102,7 +102,7 @@ export default class LighthouseScoreNerdlet extends React.Component {
                 </StackItem>
               </>
             )}
-            <StackItem style={{ marginLeft: "50px" }}>
+            {/* <StackItem style={{ marginLeft: "50px" }}>
               <div
                 style={{
                   borderLeft: "6px solid rgb(170 170 170 / 16%)",
@@ -150,7 +150,7 @@ export default class LighthouseScoreNerdlet extends React.Component {
               >
                 SEO Viz
               </Button>
-            </StackItem>
+            </StackItem> */}
           </Stack>
 
           <CardSection />
