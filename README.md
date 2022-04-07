@@ -1,20 +1,12 @@
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
 # Lighthouse Scores & Audits 
-![GitHub forks](https://img.shields.io/github/forks/newrelic-experimental/newrelic-experimental-FIT-template?style=social)
-![GitHub stars](https://img.shields.io/github/stars/newrelic-experimental/newrelic-experimental-FIT-template?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/newrelic-experimental/newrelic-experimental-FIT-template?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/newrelic-experimental/nr1-lighthouse-scores)
 
-![GitHub all releases](https://img.shields.io/github/downloads/newrelic-experimental/newrelic-experimental-FIT-template/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/newrelic-experimental/newrelic-experimental-FIT-template)
-![GitHub last commit](https://img.shields.io/github/last-commit/newrelic-experimental/newrelic-experimental-FIT-template)
-![GitHub Release Date](https://img.shields.io/github/release-date/newrelic-experimental/newrelic-experimental-FIT-template)
-
-
-![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/newrelic-experimental-FIT-template)
-![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/newrelic-experimental-FIT-template)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/newrelic-experimental-FIT-template)
-![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-experimental-FIT-template)
+![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/nr1-lighthouse-scores)
+![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/nr1-lighthouse-scores)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/nr1-lighthouse-scores)
+![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/nr1-lighthouse-scores)
 
 
 > This Application allows you to build Synthetic Scripts for retrieving Lighthouse Metrics and Audits via the Lighthouse CLI, see all of your site scores across your New Relic account, and includes Custom Visualizations you can add to any dashboard.
@@ -25,7 +17,7 @@
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |:x:|:white_check_mark:|:x:|:x:|:white_check_mark:|:white_check_mark:|
 
-### List of Metrics,Events,Logs,Traces 
+### List of Events
 |Name | Type | Description |
 |:-:|:-:|:-:|
 |*lighthousePerformance* | Event|  *The overall Performance score of your site, including performance audit information*|
@@ -33,7 +25,7 @@
 |*lighthouseSeo* | Event|  *The overall SEO score of your site, including SEO audit information*|
 |*lighthousePwa* | Event|  *The overall PWA score of your site, including PWA audit information*|
 |*lighthouseBestPractices* | Event|  *The overall Best Practices score of your site, including Best Practices audit information*|
-|---|---|---|
+
 
 ## Installation
 
