@@ -1,6 +1,6 @@
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
-# [Project Name] 
+# Lighthouse Scores & Audits 
 ![GitHub forks](https://img.shields.io/github/forks/newrelic-experimental/newrelic-experimental-FIT-template?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/newrelic-experimental/newrelic-experimental-FIT-template?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/newrelic-experimental/newrelic-experimental-FIT-template?style=social)
@@ -17,26 +17,30 @@
 ![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-experimental-FIT-template)
 
 
->[Brief description - what is the project and value does it provide? How often should users expect to get releases? How is versioning set up? Where does this project want to go?]
+> This Application allows you to build Synthetic Scripts for retrieving Lighthouse Metrics and Audits via the Lighthouse CLI, see all of your site scores across your New Relic account, and includes Custom Visualizations you can add to any dashboard.
 
 ## Value 
 
 |Metrics | Events | Logs | Traces | Visualization | Automation |
 |:-:|:-:|:-:|:-:|:-:|:-:|
-|:white_check_mark:|:white_check_mark:|:x:|:white_check_mark:|:x:|:x:|
+|:x:|:white_check_mark:|:x:|:x:|:white_check_mark:|:white_check_mark:|
 
 ### List of Metrics,Events,Logs,Traces 
 |Name | Type | Description |
 |:-:|:-:|:-:|
-|*metric.name* | Metric| *description*|
-|*event.name* | Event|  *description*|
-|*log.name* | Log|  *description*|
-|*trace.name*| Trace| *description*
+|*lighthousePerformance* | Event|  *The overall Performance score of your site, including performance audit information*|
+|*lighthouseAccessibility* | Event|  *The overall Accessibility score of your site, including Accessibility audit information*|
+|*lighthouseSeo* | Event|  *The overall SEO score of your site, including SEO audit information*|
+|*lighthousePwa* | Event|  *The overall PWA score of your site, including PWA audit information*|
+|*lighthouseBestPractices* | Event|  *The overall Best Practices score of your site, including Best Practices audit information*|
 |---|---|---|
 
 ## Installation
 
-> [Include a step-by-step procedure on how to get your code installed. Be sure to include any third-party dependencies that need to be installed separately]
+Clone repo then:
+ - `npm install`
+ - `nr1 nerdpack:uuid -gf`
+ - `nr1 nerdpack:serve`
 
 ## Getting Started
 
