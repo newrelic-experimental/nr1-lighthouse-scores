@@ -19,7 +19,7 @@ import {
   CardSection,
   AccountPicker,
 } from "nr1";
-import { scoreScript } from "../../../src/utils/constants";
+import { scoreScript, scoreScriptLegacy } from "../../../src/utils/constants";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
@@ -40,14 +40,14 @@ export default class BuildScriptModal extends React.Component {
         "seo",
       ],
       url: "",
-      monitorName:
-        "LighthouseScores - https://www.example.com (Desktop)",
+      monitorName: "LighthouseScores - https://www.example.com (Desktop)",
       nrLicenseKey: "",
       pageSpeedApiKey: "",
       isValid: true,
       urlStatus: 0,
       code: scoreScript,
       scriptLoading: false,
+      nodeVersion: "node16",
     };
   }
 
@@ -78,7 +78,9 @@ export default class BuildScriptModal extends React.Component {
         .toUpperCase()}${strategy.slice(1)})`,
     });
   };
-
+  _onSelectNodeVersion = (evt, value) => {
+    this.setState({ nodeVersion: value });
+  };
   _onSelectLocation = (evt, value) => {
     this.setState({ selectedLocation: value });
   };
@@ -111,10 +113,15 @@ export default class BuildScriptModal extends React.Component {
   };
 
   _buildScript = async () => {
-    const { hostname } = window.location;
     this.setState({ scriptLoading: true });
-    const { selectedAudits, url, strategy, nrLicenseKey, pageSpeedApiKey } =
-      this.state;
+    const {
+      selectedAudits,
+      url,
+      strategy,
+      nrLicenseKey,
+      pageSpeedApiKey,
+      nodeVersion,
+    } = this.state;
     const { accountId } = this.props;
     let isValid =
       Object.values({
@@ -149,12 +156,10 @@ export default class BuildScriptModal extends React.Component {
       return this.setState({ isValid });
     }
 
-    const staging =
-      hostname.includes("staging") || !hostname.includes("newrelic.com")
-        ? "staging-"
-        : "";
-    const geo = hostname.includes("eu") ? "eu01.nr-data.net" : "newrelic.com";
-    const event_url = `https://${staging}insights-collector.${geo}/v1/accounts/${accountId}/events`;
+    const geo = nrLicenseKey.startsWith("eu")
+      ? "eu01.nr-data.net"
+      : "newrelic.com";
+    const event_url = `https://insights-collector.${geo}/v1/accounts/${accountId}/events`;
 
     const newScript = `const categories = [${selectedAudits.map(
       (aud) => `"${aud}"`
@@ -171,7 +176,7 @@ const PAGE_SPEED_KEY = ${
     };
 const ACCOUNT_ID = '${accountId}';
 const EVENT_URL = '${event_url}';
-      ${scoreScript}
+      ${nodeVersion === "node10" ? scoreScriptLegacy : scoreScript}
     `;
 
     this.setState({ code: newScript, showScript: true, scriptLoading: false });
@@ -188,6 +193,7 @@ const EVENT_URL = '${event_url}';
       isValid,
       urlStatus,
       code,
+      nodeVersion,
       showScript,
       scriptLoading,
     } = this.state;
@@ -236,13 +242,23 @@ const EVENT_URL = '${event_url}';
                     />
                     <Select
                       description="Description value"
-                      label="Select strategy"
-                      info="Info value"
+                      label="Select Node Version"
+                      info="Legacy Node monitors use the request module. New monitors should"
                       value={strategy}
                       onChange={this._onSelectStrategy}
                     >
                       <SelectItem value="desktop">Desktop</SelectItem>
                       <SelectItem value="mobile">Mobile</SelectItem>
+                    </Select>
+                    <Select
+                      description="Description value"
+                      label="Select Device"
+                      info="Info value"
+                      value={nodeVersion}
+                      onChange={this._onSelectNodeVersion}
+                    >
+                      <SelectItem value="node10">Node 10 (Legacy)</SelectItem>
+                      <SelectItem value="node16">Node 16.0.0</SelectItem>
                     </Select>
                     <CheckboxGroup
                       label="Select Audits"
@@ -251,6 +267,7 @@ const EVENT_URL = '${event_url}';
                       required
                     >
                       <Checkbox
+                        checked
                         disabled
                         label="Performance"
                         value="performance"
@@ -300,14 +317,6 @@ const EVENT_URL = '${event_url}';
                       onChange={this._setPageSpeedApiKey}
                       required
                     />
-
-                    <TextField
-                      label="Suggested monitor name"
-                      placeholder="XXX or $secure.PAGESPEED_API_KEY"
-                      value={monitorName}
-                      style={{ width: "100%" }}
-                      readOnly
-                    />
                   </Form>
                 </GridItem>
                 <GridItem columnSpan={1}>
@@ -327,6 +336,13 @@ const EVENT_URL = '${event_url}';
                   </Card>
                 </GridItem>
                 <GridItem columnSpan={7}>
+                  <TextField
+                    label="Suggested monitor name"
+                    placeholder="XXX or $secure.PAGESPEED_API_KEY"
+                    value={monitorName}
+                    style={{ width: "100%" }}
+                    readOnly
+                  />
                   {scriptLoading && <Spinner type={Spinner.TYPE.DOT} />}
                   {showScript && (
                     <Card>

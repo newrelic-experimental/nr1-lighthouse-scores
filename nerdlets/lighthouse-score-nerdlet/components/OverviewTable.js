@@ -58,7 +58,7 @@ export default class OverviewTable extends React.Component {
         const query = ngql`query($id: Int!) {
             actor {
               account(id: $id) {
-              nrql(query: "SELECT average(score) FROM ${eventType} FACET requestedUrl, strategy SINCE 2 days ago") {
+              nrql(query: "SELECT average(score) FROM ${eventType} FACET requestedUrl, deviceType SINCE 2 days ago") {
                 nrql
                 results
               }
@@ -82,7 +82,7 @@ export default class OverviewTable extends React.Component {
             },
           },
         } = data;
-
+        console.log(results);
         return { eventType, data: results };
       })
     );
@@ -104,15 +104,15 @@ export default class OverviewTable extends React.Component {
       })
       .filter((a) => !(2 - (this[a] = ++this[a] | 0)));
 
-    const items = requestedUrls.map(([requestedUrl, strategy]) => {
+    const items = requestedUrls.map(([requestedUrl, deviceType]) => {
       return results.reduce((acc, result) => {
         const averageScore = result.data.find(
           (datum) =>
-            datum.facet[0] === requestedUrl && datum.facet[1] === strategy
+            datum.facet[0] === requestedUrl && datum.facet[1] === deviceType
         )["average.score"];
         return {
           requestedUrl,
-          strategy,
+          deviceType,
           ...acc,
           [`${result.eventType}Score`]: averageScore,
         };
@@ -121,62 +121,62 @@ export default class OverviewTable extends React.Component {
     return items;
   };
 
-  _openAccessibilityModal = (requestedUrl, strategy) => {
+  _openAccessibilityModal = (requestedUrl, deviceType) => {
     const { accountId } = this.props;
     navigation.openStackedNerdlet({
       id: "accessibility-modal",
       urlState: {
         accountId,
         requestedUrl,
-        strategy,
+        deviceType,
       },
     });
   };
 
-  _openPerformanceModal = (requestedUrl, strategy) => {
+  _openPerformanceModal = (requestedUrl, deviceType) => {
     const { accountId } = this.props;
     navigation.openStackedNerdlet({
       id: "performance-modal",
       urlState: {
         accountId,
         requestedUrl,
-        strategy,
+        deviceType,
       },
     });
   };
 
-  _openBestPracticesModal = (requestedUrl, strategy) => {
+  _openBestPracticesModal = (requestedUrl, deviceType) => {
     const { accountId } = this.props;
     navigation.openStackedNerdlet({
       id: "best-practices-modal",
       urlState: {
         accountId,
         requestedUrl,
-        strategy,
+        deviceType,
       },
     });
   };
 
-  _openSeoModal = (requestedUrl, strategy) => {
+  _openSeoModal = (requestedUrl, deviceType) => {
     const { accountId } = this.props;
     navigation.openStackedNerdlet({
       id: "seo-modal",
       urlState: {
         accountId,
         requestedUrl,
-        strategy,
+        deviceType,
       },
     });
   };
 
-  _openPwaModal = (requestedUrl, strategy) => {
+  _openPwaModal = (requestedUrl, deviceType) => {
     const { accountId } = this.props;
     navigation.openStackedNerdlet({
       id: "pwa-modal",
       urlState: {
         accountId,
         requestedUrl,
-        strategy,
+        deviceType,
       },
     });
   };
@@ -198,7 +198,7 @@ export default class OverviewTable extends React.Component {
             >
               Requested URL
             </TableHeaderCell>
-            <TableHeaderCell value={({ item }) => item.strategy} width="10%">
+            <TableHeaderCell value={({ item }) => item.deviceType} width="10%">
               Device
             </TableHeaderCell>
             <TableHeaderCell
@@ -228,7 +228,7 @@ export default class OverviewTable extends React.Component {
             <TableRow>
               <TableRowCell>{item.requestedUrl}</TableRowCell>
               <TableRowCell>
-                {item.strategy === "mobile" ? (
+                {item.deviceType === "mobile" ? (
                   <Tooltip text="Mobile">
                     <Icon
                       type={Icon.TYPE.HARDWARE_AND_SOFTWARE__HARDWARE__MOBILE}
@@ -250,7 +250,7 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openPerformanceModal(item.requestedUrl, item.strategy)
+                  this._openPerformanceModal(item.requestedUrl, item.deviceType)
                 }
               >
                 {Math.round(item.lighthousePerformanceScore * 100)}
@@ -263,7 +263,7 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openAccessibilityModal(item.requestedUrl, item.strategy)
+                  this._openAccessibilityModal(item.requestedUrl, item.deviceType)
                 }
               >
                 {Math.round(item.lighthouseAccessibilityScore * 100)}
@@ -276,7 +276,7 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openBestPracticesModal(item.requestedUrl, item.strategy)
+                  this._openBestPracticesModal(item.requestedUrl, item.deviceType)
                 }
               >
                 {Math.round(item.lighthouseBestPracticesScore * 100)}
@@ -287,7 +287,7 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openSeoModal(item.requestedUrl, item.strategy)
+                  this._openSeoModal(item.requestedUrl, item.deviceType)
                 }
               >
                 {Math.round(item.lighthouseSeoScore * 100)}
@@ -298,7 +298,7 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openPwaModal(item.requestedUrl, item.strategy)
+                  this._openPwaModal(item.requestedUrl, item.deviceType)
                 }
               >
                 {Math.round(item.lighthousePwaScore * 100)}
