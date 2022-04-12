@@ -19,7 +19,7 @@ import {
   CardSection,
   AccountPicker,
 } from "nr1";
-import { scoreScript, scoreScriptLegacy } from "../../../src/utils/constants";
+import { scoreScript } from "../../../src/utils/constants";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
@@ -176,7 +176,7 @@ const PAGE_SPEED_KEY = ${
     };
 const ACCOUNT_ID = '${accountId}';
 const EVENT_URL = '${event_url}';
-      ${nodeVersion === "node10" ? scoreScriptLegacy : scoreScript}
+      ${scoreScript}
     `;
 
     this.setState({ code: newScript, showScript: true, scriptLoading: false });

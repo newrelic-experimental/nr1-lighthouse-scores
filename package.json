@@ -1,13 +1,13 @@
 {
     "private": true,
     "name": "lighthouse-score",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "scripts": {
         "start": "nr1 nerdpack:serve",
         "test": "exit 0"
     },
     "nr1": {
-        "uuid": "c9f2d990-87c9-4f8b-854b-6acec2a8f84d"
+        "uuid": "06f79849-4ab3-49b1-bdff-398baebd51ed"
     },
     "dependencies": {
         "@monaco-editor/react": "^4.3.1",
