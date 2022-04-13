@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "lighthouse-score",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "scripts": {
         "start": "nr1 nerdpack:serve",
         "test": "exit 0"

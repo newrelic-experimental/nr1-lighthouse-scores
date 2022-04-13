@@ -47,7 +47,7 @@ export default class BuildScriptModal extends React.Component {
       urlStatus: 0,
       code: scoreScript,
       scriptLoading: false,
-      nodeVersion: "node16",
+      nodeVersion: "node10",
     };
   }
 
@@ -253,12 +253,12 @@ const EVENT_URL = '${event_url}';
                     <Select
                       description="Description value"
                       label="Select Device"
-                      info="Info value"
+                      info="Please use Node 10 (Legacy) when creating your monitor"
                       value={nodeVersion}
                       onChange={this._onSelectNodeVersion}
                     >
                       <SelectItem value="node10">Node 10 (Legacy)</SelectItem>
-                      <SelectItem value="node16">Node 16.0.0</SelectItem>
+                      <SelectItem value="node16" disabled>Node 16.0.0</SelectItem>
                     </Select>
                     <CheckboxGroup
                       label="Select Audits"

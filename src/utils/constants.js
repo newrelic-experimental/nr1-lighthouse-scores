@@ -10,6 +10,7 @@ export const scoreScript = `
 
 
 // Do not modify code below this line!!!!
+const request = require("request");
 const MAX_LENGTH = 4096;
 
 var headers = {
@@ -118,7 +119,7 @@ categories.forEach((cat) => {
           ),
         };
 
-        $http.post({
+        request.post({
           url: EVENT_URL,
           headers: headers,
           body: JSON.stringify({
