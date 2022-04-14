@@ -168,6 +168,13 @@ The app includes:
    - Best Practices
    - PWA
    - Accessibility
+ - Scores for Web Core Vitals and other Performance Metrics
+   - Time To Interactive (First Input Delay)
+   - Largest Contentful Paint
+   - Cumulative Layout Shift
+   - First Contentful Paint
+   - Speed Index
+   - Total Blocking Time
  - Audit details for each category
  - Metrics broken down by device type
  - Custom visualisations so you can add unique data to any dashboard in New Relic
