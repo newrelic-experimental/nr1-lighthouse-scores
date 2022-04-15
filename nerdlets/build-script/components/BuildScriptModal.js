@@ -19,7 +19,7 @@ import {
   CardSection,
   AccountPicker,
 } from "nr1";
-import { scoreScript } from "../../../src/utils/constants";
+import { legacyScoreScript, scoreScript } from "../../../src/utils/constants";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
@@ -47,7 +47,7 @@ export default class BuildScriptModal extends React.Component {
       urlStatus: 0,
       code: scoreScript,
       scriptLoading: false,
-      nodeVersion: "node10",
+      nodeVersion: "node16",
     };
   }
 
@@ -176,7 +176,7 @@ const PAGE_SPEED_KEY = ${
     };
 const ACCOUNT_ID = '${accountId}';
 const EVENT_URL = '${event_url}';
-      ${scoreScript}
+      ${nodeVersion === 'node16' ? scoreScript : legacyScoreScript}
     `;
 
     this.setState({ code: newScript, showScript: true, scriptLoading: false });
@@ -253,12 +253,12 @@ const EVENT_URL = '${event_url}';
                     <Select
                       description="Description value"
                       label="Select Device"
-                      info="Please use Node 10 (Legacy) when creating your monitor"
+                      info="Please ensure you use the same setting when creating your monitor"
                       value={nodeVersion}
                       onChange={this._onSelectNodeVersion}
                     >
+                      <SelectItem value="node16">Node 16.0.0</SelectItem>
                       <SelectItem value="node10">Node 10 (Legacy)</SelectItem>
-                      <SelectItem value="node16" disabled>Node 16.0.0</SelectItem>
                     </Select>
                     <CheckboxGroup
                       label="Select Audits"

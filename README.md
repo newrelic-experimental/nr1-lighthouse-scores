@@ -104,13 +104,8 @@
             ></path>{" "}
           </g>{" "}
         </svg><a href="https://developers.google.com/web/tools/lighthouse">Powered by Lighthouse</a></img>
-
-![GitHub last commit](https://img.shields.io/github/last-commit/newrelic-experimental/nr1-lighthouse-scores)
-
-![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/nr1-lighthouse-scores)
-![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/nr1-lighthouse-scores)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/nr1-lighthouse-scores)
-![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/nr1-lighthouse-scores)
+        
+![GitHub last commit](https://img.shields.io/github/last-commit/newrelic-experimental/nr1-lighthouse-scores) ![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/nr1-lighthouse-scores) ![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/nr1-lighthouse-scores) ![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/nr1-lighthouse-scores) ![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/nr1-lighthouse-scores)
 
 
 > This Application allows you to build Synthetic Scripts for retrieving Lighthouse Metrics and Audits via the [PageSpeed Insights API](https://developers.google.com/web/tools/lighthouse#psi), see all of your site scores across your New Relic account, and includes Custom Visualizations you can add to any dashboard.
