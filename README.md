@@ -43,7 +43,7 @@
                 stop-color="#262626"
                 stop-opacity=".1"
                 offset="0%"
-              ></stop>f
+              ></stop>
               <stop stop-color="#262626" stop-opacity="0" offset="100%"></stop>
             </linearGradient>
             <linearGradient
