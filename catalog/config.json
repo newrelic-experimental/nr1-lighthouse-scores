@@ -1,0 +1,19 @@
+{
+  "tagline": "Lighthouse Nerdpack & Custom Visualizations",
+  "details": "This Application allows you to build Synthetic Scripts for retrieving Lighthouse Metrics and Audits via the PageSpeed Insights API, see all of your site scores across your New Relic account, and includes Custom Visualizations you can add to any dashboard.",
+  "categoryTerms": [],
+  "keywords": [],
+  "repository": "",
+  "whatsNew": "",
+  "support": {
+    "email": {
+      "address": "rdouglas@newrelic.com"
+    },
+    "issues": {
+      "url": ""
+    },
+    "community": {
+      "url": ""
+    }
+  }
+}
