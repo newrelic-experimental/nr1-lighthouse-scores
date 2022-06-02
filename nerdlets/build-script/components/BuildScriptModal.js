@@ -20,6 +20,7 @@ import {
   AccountPicker,
 } from "nr1";
 import { legacyScoreScript, scoreScript } from "../../../src/utils/constants";
+import {isUrlSafe} from "../../../utils/helpers";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
@@ -132,24 +133,8 @@ export default class BuildScriptModal extends React.Component {
         accountId,
       }).filter((v) => v.length === 0).length === 0;
 
-    try {
-      if (url) {
-        const res = await fetch(url, {
-          method: "GET",
-        });
-        this.setState({ urlStatus: res.status });
-
-        if (res.status >= 400) {
-          isValid = false;
-          this.setState({ isValid: false });
-        }
-      } else {
-        isValid = false;
-        this.setState({ isValid: false });
-      }
-    } catch (e) {
-      isValid = false;
-      this.setState({ isValid: false, urlStatus: e.message });
+    if (url && !isUrlSafe(url)) {
+      return this.setState({ isValid: false });
     }
 
     if (!isValid) {
@@ -231,8 +216,7 @@ const EVENT_URL = '${event_url}';
                       style={{ width: "100%" }}
                       invalid={
                         (!isValid && !url) ||
-                        urlStatus >= 400 ||
-                        typeof urlStatus !== "number"
+                        (url && !isUrlSafe(url))
                           ? "Please enter a valid URL"
                           : ""
                       }
