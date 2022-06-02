@@ -102,55 +102,7 @@ export default class LighthouseScoreNerdlet extends React.Component {
                 </StackItem>
               </>
             )}
-            {/* <StackItem style={{ marginLeft: "50px" }}>
-              <div
-                style={{
-                  borderLeft: "6px solid rgb(170 170 170 / 16%)",
-                  height: "100px",
-                }}
-              ></div>
-            </StackItem>
-            <StackItem>
-              <HeadingText spacingType={[HeadingText.SPACING_TYPE.LARGE]}>
-                Custom Visualizations
-              </HeadingText>
-              <Button
-                spacingType={[Button.SPACING_TYPE.LARGE]}
-                to="https://one.newrelic.com/dashboards/visualization-explorer/builder?state=b35cfedb-c021-d1b7-d5f1-94f43b89544d"
-              >
-                Overall Scores Viz
-              </Button>
-              <Button
-                spacingType={[Button.SPACING_TYPE.LARGE]}
-                to="https://one.newrelic.com/dashboards/visualization-explorer/builder?state=24289fdd-5a80-d3fb-0bd7-19e9d479423a"
-              >
-                Accessibility Viz
-              </Button>
-              <Button
-                spacingType={[Button.SPACING_TYPE.LARGE]}
-                to="https://one.newrelic.com/dashboards/visualization-explorer/builder?state=529315e2-9e70-84b5-0636-764af80c6c7b"
-              >
-                Best Practices Viz
-              </Button>
-              <Button
-                spacingType={[Button.SPACING_TYPE.LARGE]}
-                to="https://one.newrelic.com/dashboards/visualization-explorer/builder?state=8ce68888-3098-14c4-fc95-77734862e82f"
-              >
-                Performance Viz
-              </Button>
-              <Button
-                spacingType={[Button.SPACING_TYPE.LARGE]}
-                to="https://one.newrelic.com/dashboards/visualization-explorer/builder?state=4a715c30-1d02-6512-130e-99d9a37822b1"
-              >
-                PWA Viz
-              </Button>
-              <Button
-                spacingType={[Button.SPACING_TYPE.LARGE]}
-                to="https://one.newrelic.com/dashboards/visualization-explorer/builder?state=fc2732d4-c53c-fcda-e81c-5b9a2b24c098"
-              >
-                SEO Viz
-              </Button>
-            </StackItem> */}
+            
           </Stack>
 
           <CardSection />

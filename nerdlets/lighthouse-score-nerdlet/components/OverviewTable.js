@@ -35,6 +35,7 @@ export default class OverviewTable extends React.Component {
 
   componentDidUpdate = async (prevProps, prevState) => {
     const { accountId } = this.props;
+    console.log({ accountId });
     if (prevProps.accountId === accountId) {
       return;
     }
@@ -90,19 +91,25 @@ export default class OverviewTable extends React.Component {
     const items = this._formatResults(allResults).sort((a, b) =>
       a.requestedUrl.localeCompare(b.requestedUrl)
     );
-
     this.setState({ items });
   };
 
   _formatResults = (results) => {
-    const requestedUrls = results
-      .flatMap((result) => {
-        return result.data.map((item) => {
-          const { facet } = item;
-          return [facet[0], facet[1]];
-        });
-      })
-      .filter((a) => !(2 - (this[a] = ++this[a] | 0)));
+    // Map to an array of URL|device arrays, then filter out duplicate arrays
+    const requestedUrls = Array.from(
+      new Set(
+        results
+          .flatMap((result) => {
+            return result.data.map((item) => {
+              const { facet } = item;
+              console.log([facet[0], facet[1]]);
+              return [facet[0], facet[1]];
+            });
+          })
+          .map(JSON.stringify)
+      ),
+      JSON.parse
+    );
 
     const items = requestedUrls.map(([requestedUrl, deviceType]) => {
       return results.reduce((acc, result) => {
@@ -118,6 +125,7 @@ export default class OverviewTable extends React.Component {
         };
       }, {});
     });
+    
     return items;
   };
 
@@ -263,7 +271,10 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openAccessibilityModal(item.requestedUrl, item.deviceType)
+                  this._openAccessibilityModal(
+                    item.requestedUrl,
+                    item.deviceType
+                  )
                 }
               >
                 {Math.round(item.lighthouseAccessibilityScore * 100)}
@@ -276,7 +287,10 @@ export default class OverviewTable extends React.Component {
                   color: "white",
                 }}
                 onClick={() =>
-                  this._openBestPracticesModal(item.requestedUrl, item.deviceType)
+                  this._openBestPracticesModal(
+                    item.requestedUrl,
+                    item.deviceType
+                  )
                 }
               >
                 {Math.round(item.lighthouseBestPracticesScore * 100)}
