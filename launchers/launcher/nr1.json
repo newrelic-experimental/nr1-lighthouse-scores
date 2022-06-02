@@ -1,7 +1,7 @@
 {
   "schemaType": "LAUNCHER",
   "id": "lighthouse-score-launcher",
-  "displayName": "Lighthouse Score",
+  "displayName": "Lighthouse Scores",
   "description": "Describe me",
   "rootNerdletId": "lighthouse-score-nerdlet"
 }
