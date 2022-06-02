@@ -176,7 +176,7 @@ const PAGE_SPEED_KEY = ${
     };
 const ACCOUNT_ID = '${accountId}';
 const EVENT_URL = '${event_url}';
-      ${nodeVersion === 'node16' ? scoreScript : legacyScoreScript}
+      ${nodeVersion === "node16" ? scoreScript : legacyScoreScript}
     `;
 
     this.setState({ code: newScript, showScript: true, scriptLoading: false });
@@ -242,8 +242,8 @@ const EVENT_URL = '${event_url}';
                     />
                     <Select
                       description="Description value"
-                      label="Select Node Version"
-                      info="Legacy Node monitors use the request module. New monitors should"
+                      label="Select Device"
+                      info="Please ensure you use the same setting when creating your monitor"
                       value={strategy}
                       onChange={this._onSelectStrategy}
                     >
@@ -252,8 +252,8 @@ const EVENT_URL = '${event_url}';
                     </Select>
                     <Select
                       description="Description value"
-                      label="Select Device"
-                      info="Please ensure you use the same setting when creating your monitor"
+                      label="Select Node Version"
+                      info="Legacy Node monitors use the request module. New monitors should use get"
                       value={nodeVersion}
                       onChange={this._onSelectNodeVersion}
                     >
