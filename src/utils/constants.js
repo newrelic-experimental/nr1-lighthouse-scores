@@ -151,6 +151,7 @@ export const scoreScript = `
 
 
 // Do not modify code below this line!!!!
+var $http = require(‘request’);
 var assert = require('assert');
 const MAX_LENGTH = 4096;
 
@@ -285,3 +286,43 @@ categories.forEach((cat) => {
     assert.ok(response.statusCode == 200, 'Expected 200 OK response')
   });
 });`
+
+export const SYNTHETIC_SCRIPT_MUTATION = `
+mutation ($monitor: SyntheticsCreateScriptBrowserMonitorInput!, $accountId: Int!) {
+  syntheticsCreateScriptBrowserMonitor(monitor: $monitor, accountId: $accountId) {
+    monitor {
+      guid
+      __typename
+    }
+    errors {
+      description
+      type
+      __typename
+    }
+    __typename
+  }
+}
+`
+
+export const SYNTHETIC_SCRIPT_DEFAULT_VARIABLES = {
+  "monitor": {
+      "name": "",
+      "status": "ENABLED",
+      "locations": {
+          "public": [
+              "US_EAST_2"
+          ],
+          "private": []
+      },
+      "period": "EVERY_15_MINUTES",
+      "script": "",
+      "advancedOptions": {
+          "enableScreenshotOnFailureAndScript": true
+      },
+      "runtime": {
+          "runtimeType": "CHROME_BROWSER",
+          "runtimeTypeVersion": "100",
+          "scriptLanguage": "JAVASCRIPT"
+      }
+  }
+}

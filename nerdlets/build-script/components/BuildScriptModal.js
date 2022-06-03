@@ -18,8 +18,9 @@ import {
   Form,
   CardSection,
   AccountPicker,
+  NerdGraphMutation
 } from "nr1";
-import { legacyScoreScript, scoreScript } from "../../../src/utils/constants";
+import { legacyScoreScript, scoreScript, SYNTHETIC_SCRIPT_MUTATION, SYNTHETIC_SCRIPT_DEFAULT_VARIABLES } from "../../../src/utils/constants";
 import {isUrlSafe} from "../../../utils/helpers";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -49,6 +50,9 @@ export default class BuildScriptModal extends React.Component {
       code: scoreScript,
       scriptLoading: false,
       nodeVersion: "node16",
+      showMutation: false,
+      showMutationVariables: false,
+      createMonitorMutation: "",
     };
   }
 
@@ -122,6 +126,7 @@ export default class BuildScriptModal extends React.Component {
       nrLicenseKey,
       pageSpeedApiKey,
       nodeVersion,
+      monitorName,
     } = this.state;
     const { accountId } = this.props;
     let isValid =
@@ -164,8 +169,47 @@ const EVENT_URL = '${event_url}';
       ${nodeVersion === "node16" ? scoreScript : legacyScoreScript}
     `;
 
-    this.setState({ code: newScript, showScript: true, scriptLoading: false });
+    const mutation = this._buildMutation({ accountId, monitorName, script: newScript, nodeVersion  })
+    this.setState({ code: newScript, showScript: true, scriptLoading: false, createMonitorMutation: mutation });
   };
+
+  _buildMutation = ({
+    accountId,
+    monitorName,
+    script,
+    nodeVersion
+  }) => {
+    return {
+      mutation: SYNTHETIC_SCRIPT_MUTATION,
+      variables: {
+        accountId,
+        monitor: {
+          ...SYNTHETIC_SCRIPT_DEFAULT_VARIABLES.monitor,
+          name: monitorName,
+          script
+        },
+      }
+      
+    }
+  }
+
+  _toggleShowMutation = () => {
+    const { showMutation } = this.state
+    this.setState({ showMutation: !showMutation })
+  }
+
+  _toggleShowMutationVariables = () => {
+    const { showMutationVariables } = this.state
+    this.setState({ showMutationVariables: !showMutationVariables })
+  }
+
+  _executeCreateMutation = async () => {
+    const { createMonitorMutation } = this.state
+    const result = await NerdGraphMutation.mutate({
+      mutation: createMonitorMutation.mutation,
+      variables: createMonitorMutation.variables,
+    });
+  }
 
   render() {
     const {
@@ -181,9 +225,12 @@ const EVENT_URL = '${event_url}';
       nodeVersion,
       showScript,
       scriptLoading,
+      showMutation,
+      showMutationVariables,
+      createMonitorMutation
     } = this.state;
     const { accountId } = this.props;
-
+    console.log(createMonitorMutation)
     return (
       <Card>
         <CardBody>
@@ -359,6 +406,68 @@ const EVENT_URL = '${event_url}';
                             fontSize: 12,
                           }}
                         />
+                        <Button
+                          iconType={
+                            Button.ICON_TYPE
+                              .INTERFACE__CHEVRON__CHEVRON_RIGHT__WEIGHT_BOLD__SIZE_8
+                          }
+                          type={Button.TYPE.PRIMARY}
+                          onClick={this._toggleShowMutation}
+                        >
+                          Show Mutation
+                        </Button>
+                        <Button
+                          iconType={
+                            Button.ICON_TYPE
+                              .INTERFACE__CHEVRON__CHEVRON_RIGHT__WEIGHT_BOLD__SIZE_8
+                          }
+                          type={Button.TYPE.PRIMARY}
+                          onClick={this._toggleShowMutationVariables}
+                        >
+                          Show Mutation Variables
+                        </Button>
+                        <Button
+                          iconType={
+                            Button.ICON_TYPE
+                              .INTERFACE__CHEVRON__CHEVRON_RIGHT__WEIGHT_BOLD__SIZE_8
+                          }
+                          type={Button.TYPE.PRIMARY}
+                          onClick={this._executeCreateMutation}
+                        >
+                          Create!
+                        </Button>
+                        {showMutation &&
+                          <Editor
+                            className="language-graphql"
+                            value={createMonitorMutation.mutation}
+                            highlight={(code) => highlight(code, languages.js)}
+                            padding={10}
+                            style={{
+                              backgroundColor: "#f5f5f5",
+                              maxHeight: "450px",
+                              overflow: "auto",
+                              fontFamily:
+                                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                              fontSize: 12,
+                            }}
+                          />
+                        }
+                        {showMutationVariables &&
+                          <Editor
+                            className="language-json"
+                            value={JSON.stringify(createMonitorMutation.variables, null, 2)}
+                            highlight={(code) => highlight(code, languages.js)}
+                            padding={10}
+                            style={{
+                              backgroundColor: "#f5f5f5",
+                              maxHeight: "450px",
+                              overflow: "auto",
+                              fontFamily:
+                                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+                              fontSize: 12,
+                            }}
+                          />
+                        }
                       </CardBody>
                     </Card>
                   )}
