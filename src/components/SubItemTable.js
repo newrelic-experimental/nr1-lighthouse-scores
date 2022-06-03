@@ -67,7 +67,7 @@ export default class SubItemTable extends React.Component {
         transformedItems.push(subKey);
       });
     });
-    console.log({ items, headings, transformedItems });
+
     return (
       <Table items={transformedItems} multivalue>
         <TableHeader>
@@ -118,7 +118,6 @@ export default class SubItemTable extends React.Component {
                     </TableRowCell>
                   );
                 }
-                !item.url && console.log({ item });
                 if (item.url?.startsWith("http")) {
                   const { value, additionalValue } = parseUrl(item.url);
                   return (
@@ -142,7 +141,6 @@ export default class SubItemTable extends React.Component {
                     </TableRowCell>
                   );
                 }
-                !item.scriptUrl && console.log({ item });
                 if (item.error) {
                   return <TableRowCell>{item.error}</TableRowCell>;
                 }
@@ -171,7 +169,6 @@ export default class SubItemTable extends React.Component {
                     </TableRowCell>
                   );
                 }
-                !item.sourceMapUrl && console.log({ item });
                 if (item.sourceMapUrl?.startsWith("http")) {
                   const { value, additionalValue } = parseUrl(
                     item.sourceMapUrl
@@ -187,7 +184,6 @@ export default class SubItemTable extends React.Component {
                 }
                 return <TableRowCell>{item.sourceMapUrl}</TableRowCell>;
               } else if (key === "node") {
-                // console.log({item})
                 if (item.node?.snippet) {
                   return (
                     <TableRowCell additionalValue={item.node.nodeLabel}>
@@ -206,7 +202,6 @@ export default class SubItemTable extends React.Component {
                   );
                 }
               } else if (key === 'product') {
-                console.log({ item })
                 return (<TableRowCell>{item[key] || ` - ${item.url}`}</TableRowCell>)
               }
               if (key === "signal") {

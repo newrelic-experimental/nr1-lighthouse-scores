@@ -27,7 +27,6 @@ export default class Accordion extends React.Component {
   }
 
   toggleAccordion = (e) => {
-    console.log(e.target.className);
     if (this.state.accordionIsOpen) {
       this.setState({ accordionIsOpen: false, display: "none" });
     } else {

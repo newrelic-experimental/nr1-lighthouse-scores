@@ -67,7 +67,6 @@ export default class Skipped extends React.Component {
                   </TableRowCell>
                 );
               } else if (key === "node") {
-                console.log(item["url"]);
                 return (
                   <TableRowCell>
                     <img
@@ -81,7 +80,6 @@ export default class Skipped extends React.Component {
                 (heading) => heading.key === key
               )[0];
               const measurement = checkMeasurement(valueType, item[key]);
-              console.log({ valueType });
               return <TableRowCell>{`${measurement}`}</TableRowCell>;
             })}
           </TableRow>

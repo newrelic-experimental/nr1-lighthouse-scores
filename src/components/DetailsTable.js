@@ -78,7 +78,6 @@ export default class DetailsTable extends React.Component {
                 }
                 return <TableRowCell>{item["url"]}</TableRowCell>;
               } else if (key === "node") {
-                console.log({ item });
                 if (item.node?.snippet) {
                   return (
                     <TableRowCell additionalValue={item.node.nodeLabel}>

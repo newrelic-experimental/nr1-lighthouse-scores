@@ -1,6 +1,18 @@
 {
   "schemaType": "NERDLET",
   "id": "lighthouse-score-nerdlet",
-  "displayName": "Lighthouse Score Nerdlet",
-  "description": ""
+  "displayName": "Lighthouse Scores",
+  "description": "",
+  "context": {
+    "entities": [
+      {
+        "domain": "BROWSER",
+        "type": "APPLICATION"
+      },
+      {
+        "domain": "SYNTH",
+        "type": "MONITOR"
+      }
+    ]
+  }
 }

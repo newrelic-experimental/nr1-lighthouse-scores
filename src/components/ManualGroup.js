@@ -25,7 +25,6 @@ export default class ManualGroup extends React.Component {
   render() {
     const { manualGroup: unsorted, visualization } = this.props;
     const manuals = sortDetails(unsorted);
-    console.log({ manuals });
     return (
       <>
         <HeadingText

@@ -61,13 +61,11 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
     const auditRefs = Object.keys(rawData)
       .filter((key) => key.includes("auditRefs_"))
       .reduce((res, key) => ((res[key] = rawData[key]), res), {});
-    // console.log({ auditRefs });
     const auditRefString = Object.keys(auditRefs).map(
       (key, index) => auditRefs[`auditRefs_${index}`]
     );
 
     const auditRefObject = JSON.parse(auditRefString.join(""));
-    console.log({ auditRefObject });
     const notApplicable = auditRefObject.filter(
       (audit) => audit.scoreDisplayMode === "notApplicable"
     );
@@ -96,7 +94,6 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
           audit.details.type !== "opportunity" &&
           audit.score < mainThresholds.good / 100)
     );
-    console.log({ nulldiagnostics, truediagnostics, hideNull });
     const generalGroup = diagnostics.filter(
       (audit) => audit.group === "best-practices-general"
     );
@@ -109,12 +106,6 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
     const trustSafetyGroup = diagnostics.filter(
       (audit) => audit.group === "best-practices-trust-safety"
     );
-    console.log({
-      generalGroup,
-      browserCompatGroup,
-      uxGroup,
-      trustSafetyGroup,
-    });
     const passed = auditRefObject.filter(
       (audit) => audit.score && audit.score >= mainThresholds.good / 100
     );
@@ -140,7 +131,6 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
 
   render() {
     const { nrqlSettings, uiSettings } = this.props;
-    console.log({ nrqlSettings, uiSettings });
     const { hideManual, hideNotApplicable, hideNull, hidePassed } = uiSettings;
 
     const { requestedUrl, accountId } = nrqlSettings;
@@ -153,7 +143,6 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
     let { timeframe, strategy } = nrqlSettings;
     timeframe = timeframe || "4 hours";
     strategy = strategy || "desktop";
-    // console.log({ timeframe, requestedUrl, strategy, nrqlSettings });
 
     const scoreQuery = `FROM lighthouseBestPractices SELECT average(score) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
@@ -186,12 +175,9 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
                 return <NoDataState />;
               }
 
-              // console.log({ data });
               const categoryScore = parseScoreFromNrqlResult(data);
-              console.log("Here");
 
               const color = getMainColor(categoryScore);
-              // console.log({ color });
               const series = [
                 { x: "progress", y: categoryScore, color },
                 {
@@ -201,7 +187,6 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
                 },
               ];
               const metadata = data[0].metadata;
-              // console.log({ auditRefObject, opportunities });
               return (
                 <>
                   <Card>

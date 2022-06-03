@@ -53,7 +53,6 @@ export const getMainColor = (value) => {
 
 export const getSymbol = (score) => {
   if (score == null) {
-    console.log("getSymbol", "score is null");
     return <Icon type={Icon.TYPE.INTERFACE__SIGN__MINUS__V_ALTERNATE} />;
   }
   const color = getMainColor(score * 100);
@@ -124,7 +123,6 @@ export const parseUrl = (url) => {
     const hostname = parsedUrl.hostname;
     const removeHost = url.split(hostname);
     const pathname = url.replace(removeHost[0], "").replace(hostname, "");
-    console.log(parsedUrl);
     return { value: pathname, additionalValue: hostname };
   } catch (e) {
     console.error(e);

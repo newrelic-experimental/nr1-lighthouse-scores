@@ -32,9 +32,7 @@ export default class Diagnostics extends React.Component {
 
   render() {
     const { diagnostics: unsorted, visualization } = this.props;
-    console.log({ unsorted });
     const diagnostics = sortDetails(unsorted);
-    console.log({ diagnostics });
     return (
       <div style={{padding: "20px"}}>
 

@@ -36,12 +36,11 @@ export default class CreateScriptModal extends React.Component {
     };
   }
   _onSelectAudits = (evt, value) => {
-    console.log(value);
     this.setState({ selectedAudits: value });
   };
   _onSelectStrategy = (evt, value) => {
     const { url } = this.state;
-    console.log({ value });
+
     this.setState({
       strategy: value,
       monitorName: `LighthouseScores - ${url} (${value})`,
@@ -49,11 +48,10 @@ export default class CreateScriptModal extends React.Component {
   };
 
   _changeFreq = (evt, value) => {
-    console.log({ value });
+
     this.setState({ freqValue: value });
   };
   _setUrl = (evt) => {
-    console.log(evt.target.value);
     const { value } = evt.target;
     const { strategy } = this.state;
     this.setState({
@@ -62,31 +60,26 @@ export default class CreateScriptModal extends React.Component {
     });
   };
   _onSelectLocation = (evt, value) => {
-    console.log({ evt, value });
     this.setState({ selectedLocation: value });
   };
   _setMonitorName = (evt) => {
-    console.log(evt.target.value);
     const { value } = evt.target;
     this.setState({
       monitorName: value,
     });
   };
   _setAccountId = (evt, value) => {
-    console.log(value);
     this.setState({
       accountId: value,
     });
   };
   _setPageSpeedApiKey = (evt) => {
-    console.log(evt.target.value);
     const { value } = evt.target;
     this.setState({
       pageSpeedApiKey: value,
     });
   };
   _setUserApiKey = (evt) => {
-    console.log(evt.target.value);
     const { value } = evt.target;
     this.setState({
       userApiKey: value,
@@ -112,14 +105,12 @@ export default class CreateScriptModal extends React.Component {
         userApiKey,
         pageSpeedApiKey,
       }).filter((v) => v.length === 0).length === 0;
-    console.log({ isValid, url });
     try {
       if (url) {
         const res = await fetch(url, {
           method: "GET",
         });
         this.setState({ urlStatus: res.status });
-        console.log({ res });
         res.status >= 400 && this.setState({ isValid: false });
       } else {
         this.setState({ isValid: false });
@@ -129,7 +120,6 @@ export default class CreateScriptModal extends React.Component {
     }
 
     if (!isValid) {
-      console.log("invalid");
       return this.setState({ isValid });
     }
     const createNewMonitor = {
@@ -139,7 +129,6 @@ export default class CreateScriptModal extends React.Component {
       uri: url,
       locations: [selectedLocation],
     };
-    console.log(createNewMonitor);
     const corsUrl = "https://ru-cors-proxy.herokuapp.com/";
     await fetch(corsUrl, {
       method: "POST",

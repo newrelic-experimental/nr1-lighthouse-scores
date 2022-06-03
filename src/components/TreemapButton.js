@@ -29,9 +29,7 @@ export default class TreemapButton extends React.Component {
         configSettings: { locale },
       },
     };
-    console.log({metadata, treemapData, locale, finalUrl, requestedUrl});
     var deflated = zlib.deflateSync(JSON.stringify(payload)).toString("base64");
-    console.log({ deflated });
     const url = "https://googlechrome.github.io/lighthouse/treemap/?gzip=1#";
 
     return (

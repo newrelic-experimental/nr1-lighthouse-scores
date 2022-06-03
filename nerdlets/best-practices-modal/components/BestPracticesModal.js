@@ -36,7 +36,7 @@ export default class BestPracticesModal extends React.Component {
     );
 
     const auditRefObject = JSON.parse(auditRefString.join(""));
-    console.log({ auditRefObject });
+
     const notApplicable = auditRefObject.filter(
       (audit) => audit.scoreDisplayMode === "notApplicable"
     );
@@ -59,12 +59,6 @@ export default class BestPracticesModal extends React.Component {
     const trustSafetyGroup = diagnostics.filter(
       (audit) => audit.group === "best-practices-trust-safety"
     );
-    console.log({
-      generalGroup,
-      browserCompatGroup,
-      uxGroup,
-      trustSafetyGroup,
-    });
     const passed = auditRefObject.filter(
       (audit) => audit.score && audit.score >= mainThresholds.good / 100
     );
@@ -198,7 +192,7 @@ export default class BestPracticesModal extends React.Component {
                             notApplicable,
                             passed,
                           } = this.transformData(resultData);
-                          // console.log({ auditRefObject, opportunities });
+
                           return (
                             <>
                               {generalGroup.length > 0 && (

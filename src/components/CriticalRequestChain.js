@@ -252,7 +252,7 @@ export default class CriticalRequestChain extends React.Component {
       );
       return this.buildTree(segment, containerEl);
     });
-    console.log(trees);
+
     return trees;
   };
   render() {

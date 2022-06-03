@@ -57,7 +57,6 @@ const LighthouseHeader = ({ title, requestedUrl, strategy, query, accountId }) =
               // console.log({ auditRefObject, opportunities });
               const { locale, userAgent, lighthouseVersion, totalTiming } =
                 resultData;
-              console.log({locale, userAgent, lighthouseVersion, totalTiming})
               return (
                 <MetadataTooltip
                   locale={locale}

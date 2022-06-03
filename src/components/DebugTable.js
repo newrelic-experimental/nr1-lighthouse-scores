@@ -27,9 +27,7 @@ export default class DebugTable extends React.Component {
 
   render() {
     const { debugData } = this.props;
-    console.log({ debugData });
     const items = Object.entries(debugData[0]);
-    console.log({ items });
     return (
       <Table items={items}>
         <TableHeader>

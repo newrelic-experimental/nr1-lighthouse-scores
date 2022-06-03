@@ -65,11 +65,9 @@ export default class LighthousePWAVisualization extends React.Component {
 
   transformData = (rawData) => {
     const auditRefObject = convertAuditRef(rawData);
-    console.log(auditRefObject);
     const diagnostics = auditRefObject.filter(
       (audit) => !["manual", "notApplicable"].includes(audit.scoreDisplayMode)
     );
-    console.log({ diagnostics });
     const pwaOptimized = diagnostics.filter(
       (audit) => audit.group === "pwa-optimized"
     );
@@ -92,7 +90,6 @@ export default class LighthousePWAVisualization extends React.Component {
 
   render() {
     const { nrqlSettings, uiSettings } = this.props;
-    console.log({ nrqlSettings, uiSettings });
     const { hideManual, hideNotApplicable, hideNull, hidePassed } = uiSettings;
 
     const { requestedUrl, accountId } = nrqlSettings;
@@ -105,7 +102,6 @@ export default class LighthousePWAVisualization extends React.Component {
     let { timeframe, strategy } = nrqlSettings;
     timeframe = timeframe || "4 hours";
     strategy = strategy || "desktop";
-    // console.log({ timeframe, requestedUrl, strategy, nrqlSettings });
 
     const scoreQuery = `FROM lighthousePwa SELECT average(score) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
@@ -113,7 +109,6 @@ export default class LighthousePWAVisualization extends React.Component {
     const auditRefQuery = `FROM lighthousePwa SELECT * WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
     }' SINCE ${timeframe} ago LIMIT 1`;
-    // console.log({ scoreQuery, auditRefQuery });
     const metadataQuery = `FROM lighthousePwa SELECT * WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
     }' SINCE ${timeframe} ago LIMIT 1`;
@@ -139,7 +134,6 @@ export default class LighthousePWAVisualization extends React.Component {
               }
               // console.log({ data });
               const categoryScore = parseScoreFromNrqlResult(data);
-              console.log("Here");
 
               const color = getMainColor(categoryScore);
               // console.log({ color });

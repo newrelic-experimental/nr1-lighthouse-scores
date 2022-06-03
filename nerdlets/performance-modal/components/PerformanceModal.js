@@ -63,7 +63,7 @@ export default class PerformanceModal extends React.Component {
           audit.details.type !== "opportunity" &&
           audit.score < mainThresholds.good / 100)
     );
-    console.log({ auditRefObject, diagnostics, opportunities });
+
     const passed = auditRefObject.filter(
       (audit) => audit.score && audit.score >= mainThresholds.good / 100
     );
@@ -110,7 +110,6 @@ export default class PerformanceModal extends React.Component {
               }
               
               const categoryScore = parseScoreFromNrqlResult(data);
-              console.log("Score");
 
               const color = getMainColor(categoryScore);
               const series = [
@@ -190,7 +189,6 @@ export default class PerformanceModal extends React.Component {
                               if (!data.length) {
                                 return <NoDataState />;
                               }
-                              console.log("Treemap");
 
                               const resultData = data[0].data[0];
                               const { finalUrl, locale } = resultData;

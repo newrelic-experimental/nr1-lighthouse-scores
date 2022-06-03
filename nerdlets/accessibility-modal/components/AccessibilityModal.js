@@ -33,7 +33,7 @@ export default class AccessibilityModal extends React.Component {
     );
 
     const auditRefObject = JSON.parse(auditRefString.join(""));
-    console.log({ auditRefObject });
+
     const notApplicable = auditRefObject.filter(
       (audit) => audit.scoreDisplayMode === "notApplicable"
     );
@@ -44,7 +44,7 @@ export default class AccessibilityModal extends React.Component {
           audit.scoreDisplayMode !== "notApplicable" &&
           audit.score < mainThresholds.good / 100)
     );
-    console.log({ diagnostics });
+
     const ariaGroup = diagnostics.filter(
       (audit) => audit.group === "a11y-aria"
     );
@@ -74,7 +74,7 @@ export default class AccessibilityModal extends React.Component {
     );
     const groups1 = diagnostics.map((audit) => audit.group);
     const groups2 = [...new Set(auditRefObject.map((audit) => audit.group))];
-    console.log({ groups1, groups2 });
+
     const passed = auditRefObject.filter(
       (audit) => audit.score && audit.score >= mainThresholds.good / 100
     );
@@ -106,7 +106,7 @@ export default class AccessibilityModal extends React.Component {
     const metadataQuery = `FROM lighthouseAccessibility SELECT * WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
     }' SINCE 2 days ago LIMIT 1`;
-    console.log({ scoreQuery, auditRefQuery, accountId });
+
     return (
       <AutoSizer>
         {({ width, height }) => (
@@ -127,12 +127,10 @@ export default class AccessibilityModal extends React.Component {
               if (!data.length) {
                 return <NoDataState />;
               }
-              console.log({ data });
+
               const categoryScore = parseScoreFromNrqlResult(data);
-              console.log("Here");
 
               const color = getMainColor(categoryScore);
-              console.log({ color });
               const series = [
                 { x: "progress", y: categoryScore, color },
                 {
@@ -215,7 +213,6 @@ export default class AccessibilityModal extends React.Component {
                           const resultData = data[0].data[0];
                           // fs.writeFileSync('thing.json', String(resultData))
                           const metadata = data[0].metadata;
-                          // console.log(JSON.stringify(metadata))
 
                           const {
                             notApplicable,
@@ -230,7 +227,7 @@ export default class AccessibilityModal extends React.Component {
                             audioVideoGroup,
                             passed,
                           } = this.transformData(resultData);
-                          // console.log({ auditRefObject, opportunities });
+
                           return (
                             <>
                               {namesLabelsGroup.length > 0 && (

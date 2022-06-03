@@ -75,7 +75,6 @@ export default class LighthousePerformanceVisualization extends React.Component 
    */
 
   transformData = (rawData) => {
-    console.log({ rawData });
     const {
       uiSettings: { hideNull },
     } = this.props;
@@ -111,7 +110,6 @@ export default class LighthousePerformanceVisualization extends React.Component 
             audit.details.type !== "opportunity" &&
             audit.score < mainThresholds.good / 100)
     );
-    console.log({ auditRefObject, diagnostics, opportunities });
     const passed = auditRefObject.filter(
       (audit) => audit.score && audit.score >= mainThresholds.good / 100
     );
@@ -129,7 +127,6 @@ export default class LighthousePerformanceVisualization extends React.Component 
 
   render() {
     const { nrqlSettings, uiSettings } = this.props;
-    console.log({ nrqlSettings, uiSettings });
     const { hideManual, hideNotApplicable, hideNull, hidePassed } = uiSettings;
 
     const { requestedUrl, accountId } = nrqlSettings;
@@ -142,7 +139,6 @@ export default class LighthousePerformanceVisualization extends React.Component 
     let { timeframe, strategy } = nrqlSettings;
     timeframe = timeframe || "4 hours";
     strategy = strategy || "desktop";
-    // console.log({ timeframe, requestedUrl, strategy, nrqlSettings });
 
     const scoreQuery = `FROM lighthousePerformance SELECT average(score) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
@@ -173,12 +169,9 @@ export default class LighthousePerformanceVisualization extends React.Component 
               if (!data.length) {
                 return <NoDataState />;
               }
-              // console.log({ data });
               const categoryScore = parseScoreFromNrqlResult(data);
-              console.log("Score");
 
               const color = getMainColor(categoryScore);
-              // console.log({ color });
               const series = [
                 { x: "progress", y: categoryScore, color },
                 {
@@ -188,7 +181,6 @@ export default class LighthousePerformanceVisualization extends React.Component 
                 },
               ];
               const metadata = data[0].metadata;
-              // console.log({ auditRefObject, opportunities });
               return (
                 <>
                   <Card>
@@ -256,15 +248,12 @@ export default class LighthousePerformanceVisualization extends React.Component 
                               if (!data.length) {
                                 return <NoDataState />;
                               }
-                              console.log("Treemap");
 
                               const resultData = data[0].data[0];
                               const { finalUrl, locale } = resultData;
                               const metadata = data[0].metadata;
-                              // console.log(JSON.stringify(metadata))
                               const { treemapData } =
                                 this.transformData(resultData);
-                              // console.log({ auditRefObject, opportunities });
                               return (
                                 <>
                                   <TreemapButton
@@ -302,10 +291,8 @@ export default class LighthousePerformanceVisualization extends React.Component 
                           const resultData = data[0].data[0];
 
                           const metadata = data[0].metadata;
-                          // console.log(JSON.stringify(metadata))
                           const { diagnostics, opportunities, passed } =
                             this.transformData(resultData);
-                          // console.log({ auditRefObject, opportunities });
                           return (
                             <>
                               <Opportunities

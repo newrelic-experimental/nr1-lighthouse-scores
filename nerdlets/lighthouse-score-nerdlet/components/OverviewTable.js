@@ -35,7 +35,7 @@ export default class OverviewTable extends React.Component {
 
   componentDidUpdate = async (prevProps, prevState) => {
     const { accountId } = this.props;
-    console.log({ accountId });
+
     if (prevProps.accountId === accountId) {
       return;
     }
@@ -83,7 +83,7 @@ export default class OverviewTable extends React.Component {
             },
           },
         } = data;
-        console.log(results);
+
         return { eventType, data: results };
       })
     );
@@ -102,7 +102,7 @@ export default class OverviewTable extends React.Component {
           .flatMap((result) => {
             return result.data.map((item) => {
               const { facet } = item;
-              console.log([facet[0], facet[1]]);
+
               return [facet[0], facet[1]];
             });
           })

@@ -19,12 +19,6 @@ const MetadataTooltip = ({
   lighthouseVersion,
   totalTiming,
 }) => {
-  console.log({
-    locale,
-    userAgent,
-    lighthouseVersion,
-    totalTiming,
-  });
   const items = [
     { name: "locale", value: locale },
     { name: "userAgent", value: userAgent },

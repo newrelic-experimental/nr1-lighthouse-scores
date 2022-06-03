@@ -67,7 +67,6 @@ export default class Passed extends React.Component {
                   </TableRowCell>
                 );
               } else if (key === "node") {
-                console.log(item["url"]);
                 return (
                   <TableRowCell>
                     <img

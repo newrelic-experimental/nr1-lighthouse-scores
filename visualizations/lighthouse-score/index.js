@@ -52,7 +52,6 @@ export default class CircularProgressBar extends React.Component {
       (metricScoring) => metricScoring.metadata.weight
     );
     const weightSum = weights.reduce((agg, val) => (agg += val));
-    console.log({ weightSum });
     console.assert(weightSum > 0.999 && weightSum < 1.0001); // lol rounding is hard.
   };
 
@@ -61,22 +60,17 @@ export default class CircularProgressBar extends React.Component {
   };
 
   formatData = (data) => {
-    console.log({ data });
     return Object.keys(ATTRIBUTES).map((att) => {
       const { name, explanation, weight, scores, metrics, link } =
         ATTRIBUTES[att];
       const filtered = data.find((point) =>
         Object.keys(point.data[0]).some((key) => key.includes(att))
       );
-      console.log({ filtered });
       const usedKey = Object.keys(filtered.data[0]).find((key) =>
         key.includes(att)
       );
-      console.log({ usedKey });
       const result = filtered.data[0][usedKey];
       const score = this.calculateScore(metrics, result);
-      console.log({ score, result });
-      // console.log(score);
       return {
         metadata: {
           id: att,
@@ -195,7 +189,6 @@ export default class CircularProgressBar extends React.Component {
     let { timeframe, strategy } = nrqlSettings;
     timeframe = timeframe || "4 hours";
     strategy = strategy || "desktop";
-    console.log({ timeframe, requestedUrl, strategy, nrqlSettings });
     const coreValuesQuery = `FROM lighthousePerformance SELECT average(firstContentfulPaint), average(largestContentfulPaint), average(interactive), average(totalBlockingTime), average(cumulativeLayoutShift), average(speedIndex) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
     }' SINCE ${timeframe} ago`;
@@ -300,7 +293,6 @@ export default class CircularProgressBar extends React.Component {
                                         if (loading) {
                                           return <Spinner />;
                                         }
-                                        console.log({ query });
                                         if (error && data === null) {
                                           return <ErrorState error={error} />;
                                         }
@@ -308,12 +300,10 @@ export default class CircularProgressBar extends React.Component {
                                         if (!data.length) {
                                           return <NoDataState />;
                                         }
-                                        // console.log({ data });
                                         const categoryScore =
                                           parseScoreFromNrqlResult(data);
                                         const color =
                                           getMainColor(categoryScore);
-                                        // console.log({ color });
                                         const series = [
                                           {
                                             x: "progress",

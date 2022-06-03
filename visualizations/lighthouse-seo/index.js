@@ -71,7 +71,6 @@ export default class LighthouseSeoVisualization extends React.Component {
       uiSettings: { hideNull },
     } = this.props;
     const auditRefObject = convertAuditRef(rawData);
-    console.log({ auditRefObject });
     const allOpportunities = auditRefObject.filter(
       (audit) => audit.details && audit.details.type == "opportunity"
     );
@@ -89,7 +88,6 @@ export default class LighthouseSeoVisualization extends React.Component {
           audit.details.type !== "opportunity" &&
           audit.score < mainThresholds.good / 100
     );
-    console.log({ diagnostics });
     const contentGroup = auditRefObject.filter(
       (audit) =>
         audit.group === "seo-content" &&
@@ -110,7 +108,6 @@ export default class LighthouseSeoVisualization extends React.Component {
     );
     const groups1 = [...new Set(diagnostics.map((audit) => audit.group))];
     const groups2 = [...new Set(auditRefObject.map((audit) => audit.group))];
-    console.log({ groups1, groups2 });
     const passed = auditRefObject.filter(
       (audit) => audit.score && audit.score >= mainThresholds.good / 100
     );
@@ -148,7 +145,6 @@ export default class LighthouseSeoVisualization extends React.Component {
     let { timeframe, strategy } = nrqlSettings;
     timeframe = timeframe || "4 hours";
     strategy = strategy || "desktop";
-    console.log({ timeframe, requestedUrl, strategy, nrqlSettings });
 
     const scoreQuery = `FROM lighthouseSeo SELECT average(score) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
       strategy || "desktop"
@@ -181,7 +177,6 @@ export default class LighthouseSeoVisualization extends React.Component {
               }
               const categoryScore = parseScoreFromNrqlResult(data);
               const color = getMainColor(categoryScore);
-              console.log({ color });
               const series = [
                 { x: "progress", y: categoryScore, color },
                 {
@@ -192,7 +187,6 @@ export default class LighthouseSeoVisualization extends React.Component {
               ];
               // fs.writeFileSync('thing.json', String(resultData))
               const metadata = data[0].metadata;
-              // console.log({ auditRefObject, opportunities });
               return (
                 <>
                   <Card>

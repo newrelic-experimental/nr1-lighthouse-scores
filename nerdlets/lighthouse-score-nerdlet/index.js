@@ -10,10 +10,15 @@ import {
   Button,
   CardSection,
   AccountPicker,
+  NerdletStateContext,
+  EntityByGuidQuery,
+  Spinner,
+  List,
+  ListItem,
 } from "nr1";
 import OverviewTable from "./components/OverviewTable";
 import Lighthouse from "../../src/components/Lighthouse";
-
+import { LighthouseMain } from "./components/LighthouseMain";
 export default class LighthouseScoreNerdlet extends React.Component {
   constructor() {
     super(...arguments);
@@ -24,7 +29,7 @@ export default class LighthouseScoreNerdlet extends React.Component {
   }
   _setAccountId = (evt, value) => {
     this.setState({ accountId: null });
-    console.log(value);
+
     this.setState({
       accountId: value,
     });
@@ -43,78 +48,31 @@ export default class LighthouseScoreNerdlet extends React.Component {
     const { accountId } = this.state;
 
     return (
-      <Card>
-        <CardBody>
-          <Stack style={{ width: "100%", display: "flex" }}>
-            <StackItem>
-              <img
-                src="https://cdn.worldvectorlogo.com/logos/google-lighthouse.svg"
-                width="50px"
-              />
-            </StackItem>
-            <StackItem>
-              <HeadingText
-                spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-                type={HeadingText.TYPE.HEADING_2}
-              >
-                Lighthouse Scores
-              </HeadingText>
-            </StackItem>
-            <StackItem style={{ padding: "10px" }}>
-              <Lighthouse />
-            </StackItem>
-          </Stack>
-          <CardSection />
-          <Stack>
-            <StackItem>
-              <AccountPicker
-                spacingType={[AccountPicker.SPACING_TYPE.LARGE]}
-                value={accountId}
-                onChange={this._setAccountId}
-                label="Choose your account"
-                required
-              />
-            </StackItem>
-            {accountId && (
-              <>
-                <StackItem>
-                  <StackItem style={{ marginLeft: "10px" }}>
-                    <div
-                      style={{
-                        borderLeft: "6px solid rgb(170 170 170 / 16%)",
-                        height: "100px",
-                      }}
-                    ></div>
-                  </StackItem>
-                </StackItem>
-                <StackItem>
-                  <HeadingText spacingType={[HeadingText.SPACING_TYPE.LARGE]}>
-                    Build Synthetics Scripts
-                  </HeadingText>
+      <NerdletStateContext.Consumer>
+        {(nerdletState) => {
+          const guid = nerdletState.entityGuid;
 
-                  <Button
-                    spacingType={[Button.SPACING_TYPE.LARGE]}
-                    type={Button.TYPE.OUTLINE}
-                    onClick={this._openModal}
-                  >
-                    Build script
-                  </Button>
-                </StackItem>
-              </>
-            )}
-            
-          </Stack>
+          if (guid) {
+            return (
+              <EntityByGuidQuery entityGuid={guid}>
+                {({ loading, error, data }) => {
+                  if (loading) {
+                    return <Spinner />;
+                  }
 
-          <CardSection />
+                  if (error) {
+                    return "Error!";
+                  }
 
-          {accountId && (
-            <>
-              <InlineMessage label="Average scores since 2 days ago" />
-              <OverviewTable accountId={accountId} />
-            </>
-          )}
-        </CardBody>
-      </Card>
+                  const entityAccountId = data.entities[0].accountId;
+                  return <LighthouseMain entityAccountId={entityAccountId} />;
+                }}
+              </EntityByGuidQuery>
+            );
+          }
+          return <LighthouseMain entityAccountId={accountId} />;
+        }}
+      </NerdletStateContext.Consumer>
     );
   }
 }
