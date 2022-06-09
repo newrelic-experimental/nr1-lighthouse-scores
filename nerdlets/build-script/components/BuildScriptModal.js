@@ -144,7 +144,7 @@ export default class BuildScriptModal extends React.Component {
     const geo = nrLicenseKey.startsWith("eu")
       ? "eu01.nr-data.net"
       : "newrelic.com";
-    const event_url = `https://insights-collector.${geo}/v1/accounts/${accountId}/events`;
+    const event_url = `https://insights-collector.${geo}/v1/accounts/${accountId || stateAccountId}/events`;
 
     const newScript = `const categories = [${selectedAudits.map(
       (aud) => `"${aud}"`
