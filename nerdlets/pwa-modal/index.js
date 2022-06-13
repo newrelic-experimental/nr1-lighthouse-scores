@@ -10,7 +10,7 @@ export default class PwaModalNerdlet extends React.Component {
           <PwaModal
             accountId={nerdletState.accountId}
             requestedUrl={nerdletState.requestedUrl}
-            strategy={nerdletState.strategy}
+            strategy={nerdletState.deviceType}
           />
         )}
       </NerdletStateContext.Consumer>

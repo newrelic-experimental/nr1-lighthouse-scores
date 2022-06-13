@@ -10,7 +10,7 @@ export default class SeoModalNerdlet extends React.Component {
           <SeoModal
             accountId={nerdletState.accountId}
             requestedUrl={nerdletState.requestedUrl}
-            strategy={nerdletState.strategy}
+            strategy={nerdletState.deviceType}
           />
         )}
       </NerdletStateContext.Consumer>

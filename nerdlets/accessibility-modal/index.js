@@ -10,7 +10,7 @@ export default class AccessibilityModalNerdlet extends React.Component {
           <AccessibilityModal
             accountId={nerdletState.accountId}
             requestedUrl={nerdletState.requestedUrl}
-            strategy={nerdletState.strategy}
+            strategy={nerdletState.deviceType}
           />
         )}
       </NerdletStateContext.Consumer>
