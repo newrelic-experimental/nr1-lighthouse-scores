@@ -10,7 +10,7 @@ export default class PerformanceModalNerdlet extends React.Component {
           <PerformanceModal
             accountId={nerdletState.accountId}
             requestedUrl={nerdletState.requestedUrl}
-            strategy={nerdletState.strategy}
+            strategy={nerdletState.deviceType}
           />
         )}
       </NerdletStateContext.Consumer>
