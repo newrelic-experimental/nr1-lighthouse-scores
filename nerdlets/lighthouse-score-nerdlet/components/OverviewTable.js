@@ -59,7 +59,7 @@ export default class OverviewTable extends React.Component {
         const query = ngql`query($id: Int!) {
             actor {
               account(id: $id) {
-              nrql(query: "SELECT average(score) FROM ${eventType} FACET requestedUrl, deviceType SINCE 2 days ago") {
+              nrql(query: "SELECT average(score) FROM ${eventType} FACET requestedUrl, deviceType SINCE 2 days ago LIMIT MAX") {
                 nrql
                 results
               }
