@@ -38,7 +38,7 @@ const LighthouseHeader = ({ title, requestedUrl, strategy, query, accountId }) =
         <StackItem>
           <NrqlQuery
             query={query}
-            accountId={accountId}
+            accountIds={[accountId]}
             pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
           >
             {({ data, loading, error }) => {

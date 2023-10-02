@@ -7,7 +7,7 @@ export default class Lighthouse extends React.Component {
   }
   render() {
     return (
-      <Button type={Button.TYPE.OUTLINE} to="https://developers.google.com/web/tools/lighthouse">
+      <Button type={Button.TYPE.SECONDARY} to="https://developers.google.com/web/tools/lighthouse">
         <svg width="14px" height="14px" viewBox="0 0 24 24">
           {" "}
           <defs>

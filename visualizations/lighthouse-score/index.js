@@ -237,7 +237,7 @@ export default class CircularProgressBar extends React.Component {
             {({ timeRange }) => (
               <NrqlQuery
                 query={coreValuesQuery}
-                accountId={accountId}
+                accountIds={[accountId]}
                 pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
               >
                 {({ data, loading, error }) => {

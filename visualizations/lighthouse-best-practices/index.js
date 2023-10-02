@@ -159,7 +159,7 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
         {({ width, height }) => (
           <NrqlQuery
             query={scoreQuery}
-            accountId={accountId}
+            accountIds={[accountId]}
             pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
           >
             {({ data, loading, error }) => {
@@ -228,7 +228,7 @@ export default class LighthouseBestPracticesVisualization extends React.Componen
                       </Stack>
                       <NrqlQuery
                         query={auditRefQuery}
-                        accountId={accountId}
+                        accountIds={[accountId]}
                         pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
                       >
                         {({ data, loading, error }) => {

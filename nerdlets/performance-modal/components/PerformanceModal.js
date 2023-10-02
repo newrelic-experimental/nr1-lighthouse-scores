@@ -93,7 +93,7 @@ export default class PerformanceModal extends React.Component {
         {({ width, height }) => (
           <NrqlQuery
             query={scoreQuery}
-            accountId={accountId}
+            accountIds={[accountId]}
             pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
           >
             {({ data, loading, error }) => {
@@ -174,7 +174,7 @@ export default class PerformanceModal extends React.Component {
                           </BlockText>
                           <NrqlQuery
                             query={auditRefQuery}
-                            accountId={accountId}
+                            accountIds={[accountId]}
                             pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
                           >
                             {({ data, loading, error }) => {
@@ -216,7 +216,7 @@ export default class PerformanceModal extends React.Component {
                       </Stack>
                       <NrqlQuery
                         query={auditRefQuery}
-                        accountId={accountId}
+                        accountIds={[accountId]}
                         pollInterval={NrqlQuery.AUTO_POLL_INTERVAL}
                       >
                         {({ data, loading, error }) => {

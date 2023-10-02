@@ -95,7 +95,7 @@ export default class SubItemTable extends React.Component {
                       <Link to={item.url}>{item.text}</Link>
                     </TableRowCell>
                   );
-                } else {
+                } else if (item.url) {
                   if (item.url.startsWith("http")) {
                     const { value, additionalValue } = parseUrl(item.url);
                     return (
@@ -108,6 +108,17 @@ export default class SubItemTable extends React.Component {
                     );
                   }
                   return <TableRowCell>{item.url}</TableRowCell>;
+                }
+                else {
+                  var i = 0;
+                  var domain = '';
+                  while (item[i]) {
+                    domain = domain + item[i];
+                    i++;
+                  }
+                  return (
+                    <TableRowCell>{domain}</TableRowCell>
+                  );
                 }
               }
               if (["url"].includes(key)) {
