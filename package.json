@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@monaco-editor/react": "^4.3.1",
-        "@uiw/react-textarea-code-editor": "^1.4.15",
+        "@uiw/react-textarea-code-editor": "^3.0.2",
         "prismjs": "^1.26.0",
         "prop-types": "^15.6.2",
         "react": "^16.6.3",
