@@ -65,7 +65,7 @@ export default class Diagnostics extends React.Component {
                         diagnostic={diagnostic}
                       />
                     )}
-                    {diagnostic.details?.type === "debugdata" && (
+                    {diagnostic.details?.type === "debugdata" && diagnostic.details.items && (
                       <DebugTable debugData={diagnostic.details.items} />
                     )}
                   </div>

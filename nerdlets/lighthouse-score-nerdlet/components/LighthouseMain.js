@@ -81,7 +81,7 @@ export const LighthouseMain = ({entityAccountId}) => {
 
                 <Button
                   spacingType={[Button.SPACING_TYPE.LARGE]}
-                  type={Button.TYPE.OUTLINE}
+                  type={Button.TYPE.SECONDARY}
                   onClick={() => _openModal(stateAccountId)}
                 >
                   Build script

@@ -11,7 +11,7 @@ export const legacyScoreScript = `
 
 // Do not modify code below this line!!!!
 const request = require("request");
-const MAX_LENGTH = 4096;
+const MAX_LENGTH = 4000;
 
 var headers = {
   "Content-Type": "json/application",
@@ -152,7 +152,7 @@ export const scoreScript = `
 
 // Do not modify code below this line!!!!
 var assert = require('assert');
-const MAX_LENGTH = 4096;
+const MAX_LENGTH = 4000;
 
 var headers = {
   "Content-Type": "json/application",
