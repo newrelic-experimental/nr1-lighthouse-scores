@@ -20,7 +20,7 @@
         "react-extensible-code-viewer": "^1.0.0",
         "react-markdown": "^7.1.0",
         "react-simple-code-editor": "^0.11.0",
-        "recharts": "^2.1.6",
+        "recharts": "^2.10.4",
         "victory": "^36.0.1"
     },
     "browserslist": [
