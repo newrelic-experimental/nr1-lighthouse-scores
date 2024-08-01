@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "lighthouse-score",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "scripts": {
         "start": "nr1 nerdpack:serve",
         "test": "exit 0"
@@ -10,18 +10,14 @@
         "uuid": "06f79849-4ab3-49b1-bdff-398baebd51ed"
     },
     "dependencies": {
-        "@monaco-editor/react": "^4.3.1",
-        "@uiw/react-textarea-code-editor": "^1.4.15",
-        "prismjs": "^1.26.0",
-        "prop-types": "^15.6.2",
-        "react": "^16.6.3",
-        "react-code-viewer": "^1.0.0",
-        "react-dom": "^16.6.3",
-        "react-extensible-code-viewer": "^1.0.0",
-        "react-markdown": "^7.1.0",
-        "react-simple-code-editor": "^0.11.0",
-        "recharts": "^2.1.6",
-        "victory": "^36.0.1"
+        "prismjs": "^1.29.0",
+        "prop-types": "^15.7.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-markdown": "^8.0.7",
+        "react-simple-code-editor": "^0.14.1",
+        "recharts": "^2.12.7",
+        "victory": "^36.9.2"
     },
     "browserslist": [
         "last 2 versions",

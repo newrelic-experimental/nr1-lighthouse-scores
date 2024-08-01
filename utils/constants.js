@@ -14,10 +14,6 @@ export const SCORE_QUERIES = [
     query: `FROM lighthouseSeo SELECT * WHERE requestedUrl = 'https://developer.newrelic.com/' LIMIT 1`,
   },
   {
-    title: "PWA",
-    query: `FROM lighthousePwa SELECT * WHERE requestedUrl = 'https://developer.newrelic.com/' LIMIT 1`,
-  },
-  {
     title: "Accessibility",
     query: `FROM lighthouseAccessibility SELECT * WHERE requestedUrl = 'https://developer.newrelic.com/' LIMIT 1`,
   },

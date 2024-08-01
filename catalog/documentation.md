@@ -11,7 +11,6 @@
 |*lighthousePerformance* | Event|  *The overall Performance score of your site, including performance audit information*|
 |*lighthouseAccessibility* | Event|  *The overall Accessibility score of your site, including Accessibility audit information*|
 |*lighthouseSeo* | Event|  *The overall SEO score of your site, including SEO audit information*|
-|*lighthousePwa* | Event|  *The overall PWA score of your site, including PWA audit information*|
 |*lighthouseBestPractices* | Event|  *The overall Best Practices score of your site, including Best Practices audit information*|
 
 
@@ -50,7 +49,6 @@ The app includes:
    - Performance
    - SEO
    - Best Practices
-   - PWA
    - Accessibility
  - Scores for Web Core Vitals and other Performance Metrics
    - Time To Interactive (First Input Delay)

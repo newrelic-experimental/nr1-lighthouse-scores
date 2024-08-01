@@ -11,10 +11,9 @@ import {
   Icon,
   Spinner,
   Tooltip,
-  Link,
   navigation,
 } from "nr1";
-import { getMainColor } from "../../../utils/helpers";
+import { getMainColor, validScore } from "../../../utils/helpers";
 import TableEmptyState from "./TableEmptyState";
 import ErrorState from "../../../src/error-state";
 
@@ -52,7 +51,6 @@ export default class OverviewTable extends React.Component {
       "lighthouseAccessibility",
       "lighthouseBestPractices",
       "lighthouseSeo",
-      "lighthousePwa",
     ];
     const allResults = await Promise.all(
       eventTypes.map(async (eventType) => {
@@ -113,80 +111,57 @@ export default class OverviewTable extends React.Component {
 
     const items = requestedUrls.map(([requestedUrl, deviceType]) => {
       return results.reduce((acc, result) => {
-        const averageScore = result.data.find(
-          (datum) =>
-            datum.facet[0] === requestedUrl && datum.facet[1] === deviceType
-        )["average.score"];
-        return {
-          requestedUrl,
-          deviceType,
-          ...acc,
-          [`${result.eventType}Score`]: averageScore,
-        };
+        try {
+          const averageScore = result.data.find(
+            (datum) =>
+              datum.facet[0] === requestedUrl && datum.facet[1] === deviceType
+          )["average.score"];
+          return {
+            requestedUrl,
+            deviceType,
+            ...acc,
+            [`${result.eventType}Score`]: averageScore,
+          };
+        }
+        catch (e) {
+          return {
+            requestedUrl,
+            deviceType,
+            ...acc,
+            [`${result.eventType}Score`]: null,
+          }
+        }
       }, {});
     });
     
     return items;
   };
 
-  _openAccessibilityModal = (requestedUrl, deviceType) => {
-    const { accountId } = this.props;
-    navigation.openStackedNerdlet({
-      id: "accessibility-modal",
-      urlState: {
-        accountId,
-        requestedUrl,
-        deviceType,
-      },
-    });
+  _getScore = (value) => {
+    if (!validScore(value)) {
+      return "No data";
+    }
+    else {
+      return Math.round(value * 100);
+    }
+  }
+
+  _getMainColor = (value) => {
+    return getMainColor(this._getScore(value));
   };
 
-  _openPerformanceModal = (requestedUrl, deviceType) => {
-    const { accountId } = this.props;
-    navigation.openStackedNerdlet({
-      id: "performance-modal",
-      urlState: {
-        accountId,
-        requestedUrl,
-        deviceType,
-      },
-    });
-  };
-
-  _openBestPracticesModal = (requestedUrl, deviceType) => {
-    const { accountId } = this.props;
-    navigation.openStackedNerdlet({
-      id: "best-practices-modal",
-      urlState: {
-        accountId,
-        requestedUrl,
-        deviceType,
-      },
-    });
-  };
-
-  _openSeoModal = (requestedUrl, deviceType) => {
-    const { accountId } = this.props;
-    navigation.openStackedNerdlet({
-      id: "seo-modal",
-      urlState: {
-        accountId,
-        requestedUrl,
-        deviceType,
-      },
-    });
-  };
-
-  _openPwaModal = (requestedUrl, deviceType) => {
-    const { accountId } = this.props;
-    navigation.openStackedNerdlet({
-      id: "pwa-modal",
-      urlState: {
-        accountId,
-        requestedUrl,
-        deviceType,
-      },
-    });
+  _openModal = (requestedUrl, deviceType, modal, value) => {
+    if (validScore(value)) {
+      const { accountId } = this.props;
+      navigation.openStackedNerdlet({
+        id: modal,
+        urlState: {
+          accountId,
+          requestedUrl,
+          deviceType,
+        },
+      });
+    }
   };
 
   render() {
@@ -227,9 +202,6 @@ export default class OverviewTable extends React.Component {
             <TableHeaderCell value={({ item }) => item.lighthouseSeoScore}>
               SEO
             </TableHeaderCell>
-            <TableHeaderCell value={({ item }) => item.lighthousePwaScore}>
-              PWA
-            </TableHeaderCell>
           </TableHeader>
 
           {({ item }) => (
@@ -252,70 +224,47 @@ export default class OverviewTable extends React.Component {
               </TableRowCell>
               <TableRowCell
                 style={{
-                  backgroundColor: getMainColor(
-                    item.lighthousePerformanceScore * 100
-                  ),
+                  backgroundColor: this._getMainColor(item.lighthousePerformanceScore),
                   color: "white",
                 }}
-                onClick={() =>
-                  this._openPerformanceModal(item.requestedUrl, item.deviceType)
+                onClick={validScore(item.lighthousePerformanceScore) ? () =>
+                  this._openModal(item.requestedUrl, item.deviceType, "performance-modal", item.lighthousePerformanceScore) : undefined
                 }
               >
-                {Math.round(item.lighthousePerformanceScore * 100)}
+                {this._getScore(item.lighthousePerformanceScore)}
               </TableRowCell>
               <TableRowCell
                 style={{
-                  backgroundColor: getMainColor(
-                    item.lighthouseAccessibilityScore * 100
-                  ),
+                  backgroundColor: this._getMainColor(item.lighthouseAccessibilityScore),
                   color: "white",
                 }}
-                onClick={() =>
-                  this._openAccessibilityModal(
-                    item.requestedUrl,
-                    item.deviceType
-                  )
+                onClick={validScore(item.lighthouseAccessibilityScore) ? () =>
+                  this._openModal(item.requestedUrl, item.deviceType, "accessibility-modal", item.lighthouseAccessibilityScore) : undefined
                 }
               >
-                {Math.round(item.lighthouseAccessibilityScore * 100)}
+                {this._getScore(item.lighthouseAccessibilityScore)}
               </TableRowCell>
               <TableRowCell
                 style={{
-                  backgroundColor: getMainColor(
-                    item.lighthouseBestPracticesScore * 100
-                  ),
+                  backgroundColor: this._getMainColor(item.lighthouseBestPracticesScore),
                   color: "white",
                 }}
-                onClick={() =>
-                  this._openBestPracticesModal(
-                    item.requestedUrl,
-                    item.deviceType
-                  )
+                onClick={validScore(item.lighthouseBestPracticesScore) ? () =>
+                  this._openModal(item.requestedUrl, item.deviceType, "best-practices-modal", item.lighthouseBestPracticesScore) : undefined
                 }
               >
-                {Math.round(item.lighthouseBestPracticesScore * 100)}
+                {this._getScore(item.lighthouseBestPracticesScore)}
               </TableRowCell>
               <TableRowCell
                 style={{
-                  backgroundColor: getMainColor(item.lighthouseSeoScore * 100),
+                  backgroundColor: this._getMainColor(item.lighthouseSeoScore),
                   color: "white",
                 }}
-                onClick={() =>
-                  this._openSeoModal(item.requestedUrl, item.deviceType)
+                onClick={validScore(item.lighthouseSeoScore) ? () =>
+                  this._openModal(item.requestedUrl, item.deviceType, "seo-modal", item.lighthouseSeoScore) : undefined
                 }
               >
-                {Math.round(item.lighthouseSeoScore * 100)}
-              </TableRowCell>
-              <TableRowCell
-                style={{
-                  backgroundColor: getMainColor(item.lighthousePwaScore * 100),
-                  color: "white",
-                }}
-                onClick={() =>
-                  this._openPwaModal(item.requestedUrl, item.deviceType)
-                }
-              >
-                {Math.round(item.lighthousePwaScore * 100)}
+                {this._getScore(item.lighthouseSeoScore)}
               </TableRowCell>
             </TableRow>
           )}

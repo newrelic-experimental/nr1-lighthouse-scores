@@ -213,12 +213,6 @@ export default class CircularProgressBar extends React.Component {
         }' SINCE ${timeframe} ago`,
       },
       {
-        title: "PWA",
-        query: `FROM lighthousePwa SELECT average(score) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
-          strategy || "desktop"
-        }' SINCE ${timeframe} ago`,
-      },
-      {
         title: "Accessibility",
         query: `FROM lighthouseAccessibility SELECT average(score) WHERE requestedUrl = '${requestedUrl}' AND deviceType = '${
           strategy || "desktop"

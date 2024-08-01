@@ -35,7 +35,7 @@ export default class TreemapButton extends React.Component {
     return (
       <Button
         iconType={Button.ICON_TYPE.DATAVIZ__DATAVIZ__SERVICE_MAP_CHART}
-        type={Button.TYPE.PRIMARY}
+        type={Button.VARIANT.PRIMARY}
         to={`${url}${deflated}`}
       >
         View Treemap
