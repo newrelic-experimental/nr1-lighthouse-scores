@@ -38,9 +38,18 @@ export function calculateRating(score) {
   return rating;
 }
 
+export const validScore = (value) => {
+  if (value === null || typeof value === "undefined" || isNaN(value)) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 export const getMainColor = (value) => {
-  // console.log({ value });
-  if (value != null && value < mainThresholds.moderate) {
+  if (!validScore(value))
+    return "grey";
+  else if (value < mainThresholds.moderate) {
     return "red";
   } else if (value >= mainThresholds.good) {
     return "green";

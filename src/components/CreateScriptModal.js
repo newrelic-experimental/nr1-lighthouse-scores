@@ -24,7 +24,7 @@ export default class CreateScriptModal extends React.Component {
     this.state = {
       freqValue: "15",
       strategy: "desktop",
-      selectedAudits: ["score", "perf", "access", "best", "pwa", "seo"],
+      selectedAudits: ["score", "perf", "access", "best", "seo"],
       selectedLocation: "AWS_US_WEST_2",
       url: "",
       monitorName: "Lighthouse(Score) - https://www.example.com (Desktop)",
@@ -206,7 +206,6 @@ export default class CreateScriptModal extends React.Component {
             <Checkbox label="Performance" value="perf" />
             <Checkbox label="Accessibility" value="access" />
             <Checkbox label="Best Practices" value="best" />
-            <Checkbox label="PWA" value="pwa" />
             <Checkbox label="SEO" value="seo" />
           </CheckboxGroup>
           <AccountPicker
@@ -267,7 +266,7 @@ export default class CreateScriptModal extends React.Component {
             <SelectItem value="1440">1 day</SelectItem>
           </Select>
           <Button
-            type={Button.TYPE.PRIMARY}
+            type={Button.VARIANT.PRIMARY}
             sizeType={Button.SIZE_TYPE.SMALL}
             spacingType={[
               HeadingText.SPACING_TYPE.EXTRA_LARGE,

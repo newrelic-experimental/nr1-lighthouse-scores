@@ -26,6 +26,7 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
+
 export default class BuildScriptModal extends React.Component {
   constructor() {
     super(...arguments);
@@ -38,7 +39,6 @@ export default class BuildScriptModal extends React.Component {
         "performance",
         "accessibility",
         "best-practices",
-        "pwa",
         "seo",
       ],
       url: "",
@@ -50,6 +50,7 @@ export default class BuildScriptModal extends React.Component {
       code: scoreScript,
       scriptLoading: false,
       nodeVersion: "node16",
+      selectedLocation: "US",
     };
   }
 
@@ -124,6 +125,7 @@ export default class BuildScriptModal extends React.Component {
       pageSpeedApiKey,
       nodeVersion,
       accountId,
+      selectedLocation,
     } = this.state;
     let isValid =
       Object.values({
@@ -141,7 +143,7 @@ export default class BuildScriptModal extends React.Component {
       return this.setState({ isValid });
     }
 
-    const geo = nrLicenseKey.startsWith("eu")
+    const geo = selectedLocation === "EU"
       ? "eu01.nr-data.net"
       : "newrelic.com";
     const event_url = `https://insights-collector.${geo}/v1/accounts/${accountId || stateAccountId}/events`;
@@ -182,6 +184,7 @@ const EVENT_URL = '${event_url}';
       showScript,
       scriptLoading,
       accountId,
+      selectedLocation,
     } = this.state;
 
     return (
@@ -231,7 +234,6 @@ const EVENT_URL = '${event_url}';
                             autoFocus
                           />
                           <Select
-                            description="Description value"
                             label="Select Device"
                             info="Please ensure you use the same setting when creating your monitor"
                             value={strategy}
@@ -241,16 +243,13 @@ const EVENT_URL = '${event_url}';
                             <SelectItem value="mobile">Mobile</SelectItem>
                           </Select>
                           <Select
-                            description="Description value"
-                            label="Select Node Version"
-                            info="Legacy Node monitors use the request module. New monitors should use get"
-                            value={nodeVersion}
-                            onChange={this._onSelectNodeVersion}
+                            label="Select Location"
+                            info="Select your New Relic DC location, check your URL, one.newrelic.com (US) or one.eu.newrelic.com (EU)."
+                            value={selectedLocation}
+                            onChange={this._onSelectLocation}
                           >
-                            <SelectItem value="node16">Node 16.0.0</SelectItem>
-                            <SelectItem value="node10">
-                              Node 10 (Legacy)
-                            </SelectItem>
+                            <SelectItem value="US">US</SelectItem>
+                            <SelectItem value="EU">EU</SelectItem>
                           </Select>
                           <CheckboxGroup
                             label="Select Audits"
@@ -272,7 +271,6 @@ const EVENT_URL = '${event_url}';
                               label="Best Practices"
                               value="best-practices"
                             />
-                            <Checkbox label="PWA" value="pwa" />
                             <Checkbox label="SEO" value="seo" />
                           </CheckboxGroup>
                           <Link
@@ -325,7 +323,7 @@ const EVENT_URL = '${event_url}';
                                 Button.ICON_TYPE
                                   .INTERFACE__CHEVRON__CHEVRON_RIGHT__WEIGHT_BOLD__SIZE_8
                               }
-                              type={Button.TYPE.PRIMARY}
+                              type={Button.VARIANT.PRIMARY}
                               onClick={() => this._buildScript(stateAccountId)}
                             >
                               Build

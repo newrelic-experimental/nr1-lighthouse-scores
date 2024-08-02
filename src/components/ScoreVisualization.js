@@ -30,7 +30,7 @@ export default class ScoreVisualization extends React.Component {
   render() {
     const { series, color, score } =
       this.props;
-    // console.log({ series, color, score })
+    //console.log({ series, color, score })
     return (
       <>
         <svg
